@@ -120,7 +120,7 @@ server.registerTool(
 
 ## Reporting Issues
 
-Open an issue at [github.com/lwalker/linkwarden-mcp-server/issues](https://github.com/lwalker/linkwarden-mcp-server/issues) with:
+Open an issue at [github.com/ozskywalker/linkwarden-mcp-server/issues](https://github.com/ozskywalker/linkwarden-mcp-server/issues) with:
 - Your Linkwarden version
 - The tool name and input that caused the issue
 - The error message or unexpected output

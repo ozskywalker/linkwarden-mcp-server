@@ -34,11 +34,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lwalker/linkwarden-mcp-server.git"
+    "url": "https://github.com/ozskywalker/linkwarden-mcp-server.git"
   },
-  "homepage": "https://github.com/lwalker/linkwarden-mcp-server#readme",
+  "homepage": "https://github.com/ozskywalker/linkwarden-mcp-server#readme",
   "bugs": {
-    "url": "https://github.com/lwalker/linkwarden-mcp-server/issues"
+    "url": "https://github.com/ozskywalker/linkwarden-mcp-server/issues"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.6.1",

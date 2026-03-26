@@ -98,7 +98,7 @@ Or if you have it installed globally (`npm install -g linkwarden-mcp-server`):
 ## Development
 
 ```bash
-git clone https://github.com/lwalker/linkwarden-mcp-server.git
+git clone https://github.com/ozskywalker/linkwarden-mcp-server.git
 cd linkwarden-mcp-server
 npm install
 npm run build
