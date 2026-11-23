@@ -112,6 +112,24 @@ LINKWARDEN_API_TOKEN=your-token \
 npm run dev
 ```
 
+## Testing
+
+`npm test` runs a live smoke test: it spawns the built server over stdio, performs
+the MCP handshake, asserts the 12-tool surface and that every tool exposes an
+object `inputSchema`, then exercises the read-only tools (`list_collections`,
+`list_tags`, `list_links`, `get_link`) against a real Linkwarden instance. It also
+checks that enum validation rejects bad input.
+
+```bash
+npm run build
+LINKWARDEN_BASE_URL=https://your-instance.com \
+LINKWARDEN_API_TOKEN=your-token \
+npm test
+```
+
+The test needs a reachable Linkwarden instance and a valid token; exit codes are
+0 (pass), 1 (assertion failure), 2 (missing env / spawn failure).
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).

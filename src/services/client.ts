@@ -154,16 +154,42 @@ export async function deleteCollection(id: number): Promise<void> {
 
 // --- Tags ---
 
+// Linkwarden is inconsistent here: /collections and /links return
+// { response: [...] } while /tags returns { data: { tags: [...] } }.
+// Normalise both so a backend shape change can never produce an empty or
+// undefined tool result (which the MCP client rejects as invalid).
+function unwrapTagArray(body: unknown): LinkwardenTag[] {
+  const b = body as Record<string, any> | null | undefined;
+  const candidates = [b?.response, b?.data?.tags, b?.data, b?.tags];
+  for (const c of candidates) {
+    if (Array.isArray(c)) return c as LinkwardenTag[];
+  }
+  throw new Error(
+    `Unexpected /tags response shape (keys: ${b && typeof b === "object" ? Object.keys(b).join(",") : typeof b})`
+  );
+}
+
+function unwrapTag(body: unknown): LinkwardenTag {
+  const b = body as Record<string, any> | null | undefined;
+  const candidates = [b?.response, b?.data?.tag, b?.tag, b?.data];
+  for (const c of candidates) {
+    if (c && typeof c === "object" && !Array.isArray(c)) return c as LinkwardenTag;
+  }
+  throw new Error(
+    `Unexpected /tags/{id} response shape (keys: ${b && typeof b === "object" ? Object.keys(b).join(",") : typeof b})`
+  );
+}
+
 export async function listTags(): Promise<LinkwardenTag[]> {
   const c = getClient();
-  const res = await c.get<{ response: LinkwardenTag[] }>("/tags");
-  return res.data.response;
+  const res = await c.get("/tags");
+  return unwrapTagArray(res.data);
 }
 
 export async function updateTag(id: number, payload: UpdateTagPayload): Promise<LinkwardenTag> {
   const c = getClient();
-  const res = await c.put<{ response: LinkwardenTag }>(`/tags/${id}`, payload);
-  return res.data.response;
+  const res = await c.put(`/tags/${id}`, payload);
+  return unwrapTag(res.data);
 }
 
 export async function deleteTag(id: number): Promise<void> {

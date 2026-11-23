@@ -127,7 +127,7 @@ Examples:
   - Paginate: pass next_cursor from previous response as cursor`,
       inputSchema: z.object({
         cursor: z.number().int().optional().describe("Pagination cursor from a previous response's next_cursor"),
-        sort: z.nativeEnum(SortOrder).default(SortOrder.DateNewestFirst).describe("0=DateNewestFirst, 1=DateOldestFirst, 2=NameAZ, 3=NameZA"),
+        sort: z.enum(SortOrder).default(SortOrder.DateNewestFirst).describe("0=DateNewestFirst, 1=DateOldestFirst, 2=NameAZ, 3=NameZA"),
         collection_id: z.number().int().optional().describe("Filter by collection ID"),
         tag_id: z.number().int().optional().describe("Filter by tag ID"),
         pinned_only: z.boolean().optional().describe("Return only pinned links"),
@@ -137,7 +137,7 @@ Examples:
         search_by_description: z.boolean().default(true).describe("Search within descriptions"),
         search_by_text_content: z.boolean().optional().describe("Search within archived text content (requires Meilisearch)"),
         search_by_tags: z.boolean().optional().describe("Search within tag names"),
-        response_format: z.nativeEnum(ResponseFormat).default(ResponseFormat.MARKDOWN).describe("'markdown' for readable output, 'json' for structured data"),
+        response_format: z.enum(ResponseFormat).default(ResponseFormat.MARKDOWN).describe("'markdown' for readable output, 'json' for structured data"),
       }),
       annotations: {
         readOnlyHint: true,
@@ -190,7 +190,7 @@ Args:
 Returns complete link data including name, URL, description, collection, tags, archived formats, and timestamps.`,
       inputSchema: z.object({
         id: z.number().int().describe("Link ID"),
-        response_format: z.nativeEnum(ResponseFormat).default(ResponseFormat.MARKDOWN),
+        response_format: z.enum(ResponseFormat).default(ResponseFormat.MARKDOWN),
       }),
       annotations: {
         readOnlyHint: true,

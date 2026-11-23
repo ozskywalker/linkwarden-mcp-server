@@ -35,7 +35,7 @@ Returns (JSON format):
     "updatedAt": string
   }]`,
       inputSchema: z.object({
-        response_format: z.nativeEnum(ResponseFormat).default(ResponseFormat.MARKDOWN),
+        response_format: z.enum(ResponseFormat).default(ResponseFormat.MARKDOWN),
       }),
       annotations: {
         readOnlyHint: true,
